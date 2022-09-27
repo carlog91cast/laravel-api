@@ -58,9 +58,9 @@ class PostController extends Controller
             ]
         );
 
-        $dataInput['user_id'] = Auth::id();
-        $dataInput['post_date'] = new DateTime();
-        $dataInput['post_image'] = Storage::put('', $dataInput['post_image']);
+        $sentData['user_id'] = Auth::id();
+        $sentData['post_date'] = new DateTime();
+        $sentData['post_image'] = Storage::put('', $sentData['post_image']);
 
         // $post = new Posts();
         // $post->user_id = 121;
@@ -70,6 +70,8 @@ class PostController extends Controller
         // $post->post_content = $sentData['post_content'];
         // $post->post_date = $sentData['post_date'];
         // $post->save();
+
+        Posts::create($sentData);
 
         return redirect()->route('admin.posts.show', compact('post'));
     }
