@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Posts;
 use App\User;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -17,11 +19,10 @@ class PostController extends Controller
      */
     public function index()
     {
-      
+
         $posts = Posts::all();
         //$posts = Posts::where('user_id', Auth::id())->get();
         return view('admin.posts.index', compact('posts'));
-        
     }
 
     /**
@@ -44,27 +45,31 @@ class PostController extends Controller
     {
         $sentData = $request->all();
 
-        // $validateData = $request->validate(
-        //     [
-        //         'author' => 'required|max:50',
-        //         'title' => 'required|unique:posts|max:60000',
-        //         'post_image' => 'required|max:50',
-        //         'post_content' => 'required|max:60000',
+        $validateData = $request->validate(
+            [
+                'author' => 'required|max:50',
+                'title' => 'required|unique:posts|max:60000',
+                'post_image' => 'required|max:50',
+                'post_content' => 'required|max:60000',
 
-        //     ],
-        //     [
-        //         'title.required' => 'aho, sto titolo ce lo volemo mette, Frà?'
-        //     ]
-        // );
+            ],
+            [
+                'title.required' => 'aho, sto titolo ce lo volemo mette, Frà?'
+            ]
+        );
 
-        $post = new Posts();
-        $post->user_id = 121;
-        $post->author = $sentData['author'];
-        $post->title = $sentData['title'];
-        $post->post_image = $sentData['post_image'];
-        $post->post_content = $sentData['post_content'];
-        $post->post_date = $sentData['post_date'];
-        $post->save();
+        $dataInput['user_id'] = Auth::id();
+        $dataInput['post_date'] = new DateTime();
+        $dataInput['post_image'] = Storage::put('', $dataInput['post_image']);
+
+        // $post = new Posts();
+        // $post->user_id = 121;
+        // $post->author = $sentData['author'];
+        // $post->title = $sentData['title'];
+        // $post->post_image = $sentData['post_image'];
+        // $post->post_content = $sentData['post_content'];
+        // $post->post_date = $sentData['post_date'];
+        // $post->save();
 
         return redirect()->route('admin.posts.show', compact('post'));
     }
