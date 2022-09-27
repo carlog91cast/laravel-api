@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\posts;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -14,7 +15,14 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = posts::all();
+        return response()->json([
+            'response' => true,
+            'count' => count($posts),
+            'results' => [
+                'data' => $posts
+            ]
+        ]);
     }
 
     /**
@@ -46,7 +54,15 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = posts::find($id);
+        if ($post) {
+            return response()->json([
+                'response' => true,
+                'results' => [
+                    'data' => $post
+                ]
+            ]);
+        } else return response('', 404);
     }
 
     /**
