@@ -2489,7 +2489,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var postsPage = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/posts', {
+      axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/posts", {
         page: postsPage
       }).then(function (response) {
         console.log(response.data.results.data);

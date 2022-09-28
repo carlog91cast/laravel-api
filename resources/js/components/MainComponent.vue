@@ -16,7 +16,7 @@ export default {
     },
     methods: {
         getPosts(postsPage = 1) {
-            axios.get('/api/posts', {
+            axios.get("/api/posts", {
                 page: postsPage
             }).then((response) => {
                 console.log(response.data.results.data);
