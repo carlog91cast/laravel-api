@@ -60,7 +60,7 @@ class PostController extends Controller
 
         $sentData['user_id'] = Auth::id();
         $sentData['post_date'] = new DateTime();
-        $sentData['post_image'] = Storage::put('', $sentData['post_image']);
+        $sentData['post_image'] = Storage::put('uploads', $sentData['post_image_uploaded']);
 
         // $post = new Posts();
         // $post->user_id = 121;
