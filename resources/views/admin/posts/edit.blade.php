@@ -26,6 +26,10 @@
                     <label for="input-author" class="form-label">author</label>
                     <input type="text" name="author" class="form-control" id="input-author">
                 </div>
+                <div class="col-md-6">
+                    <label for="input-image" class="form-label">post image</label>
+                    <input type="file" class="form-control" name="post_image_uploaded" id="input-image">
+                </div>
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary">Edit in</button>
                 </div>
